@@ -6,7 +6,7 @@ const Layout = () => {
   return (
     <Box display="flex" gap="67px">
       <Sidebar />
-      <Box paddingTop="44px">
+      <Box paddingTop="44px" flexGrow={1}>
         <Outlet />
       </Box>
     </Box>

@@ -5,18 +5,28 @@ const customTheme = createTheme({
   palette: {
     secondary: {
       main: "#46464F",
-      light: "#F1EFFF"
+      light: "#F1EFFF",
     },
-    primary : {
+    primary: {
       main: "#F1EFFF",
-      light : "#2E3EFF",
-    }
+      light: "#2E3EFF",
+    },
   },
   typography: {
     fontFamily: '"Plus Jakarta Sans", sans-serif',
     subtitle1: {
       fontSize: "12px",
       fontWeight: 500,
+      lineHeight: "16px",
+    },
+    h1: {
+      fontSize: "22px",
+      fontWeight: 400,
+      lineHeight: "28px",
+    },
+    subtitle2: {
+      fontSize: "12px",
+      fontWeight: 400,
       lineHeight: "16px",
     },
   },
