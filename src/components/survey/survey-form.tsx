@@ -7,50 +7,22 @@ import {
   OutlinedInput,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormLabel from "@mui/material/FormLabel";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import FormControlSx from "@/components/shared/form-control/form-control-sx";
-import dayjs, { Dayjs } from "dayjs";
 import DatePickerSx from "@/components/shared/date-picker/date-picker-sx";
-import ButtonSx from "../shared/button/button-sx";
+import ButtonSx from "@/components/shared/button/button-sx";
+import useSurveyForm from "@/hooks/useSurveyForm";
 
-const names = [
-  "Oliver Hansen",
-  "Van Henry",
-  "April Tucker",
-  "Ralph Hubbard",
-  "Omar Alexander",
-  "Carlos Abbott",
-  "Miriam Wagner",
-  "Bradley Wilkerson",
-  "Virginia Andrews",
-  "Kelly Snyder",
-];
+const names = ["Oliver Hansen", "Van Henry", "April Tucker"];
 
 const SurveyForm = () => {
-  const [name, setName] = useState("e.g. ESG Assessment 2022");
-  const [value, setValue] = useState<Dayjs | null>(dayjs("2022-04-17"));
-
-  const handleDateChange = (date: Dayjs | null) => {
-    setValue(date);
-  };
-
-  const [personName, setPersonName] = useState<string[]>([]);
-
-  const handleChange = (event: SelectChangeEvent<typeof personName>) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
-  };
+  const { formvalue, handleDateChange, handleFormValue, handleChange } =
+    useSurveyForm();
 
   return (
     <Box display="flex" flexDirection="column" gap="32px">
@@ -59,8 +31,9 @@ const SurveyForm = () => {
         <OutlinedInput
           id="name"
           label="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          placeholder="Name"
+          value={formvalue.name}
+          onChange={handleFormValue}
         />
         <Typography variant="subtitle2" component="p" marginLeft="16px">
           This will be presented to recipients
@@ -71,7 +44,7 @@ const SurveyForm = () => {
         <Select
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
-          value={personName || "Please select a form"}
+          value={formvalue.person}
           onChange={handleChange}
           input={<OutlinedInput label="Name" />}
         >
@@ -163,7 +136,7 @@ const SurveyForm = () => {
       >
         <DatePickerSx
           label="Deadline for responses"
-          value={value}
+          value={formvalue.deadline}
           handleDateChange={handleDateChange}
         />
       </FormControlSx>
@@ -174,9 +147,11 @@ const SurveyForm = () => {
             marginTop: "52px",
           }}
           id="notes"
+          name="notes"
+          placeholder="notes"
           label="Name"
-          value={""}
-          onChange={(e) => setName(e.target.value)}
+          value={formvalue.notes}
+          onChange={handleFormValue}
         />
         <Typography variant="subtitle2" component="p" marginLeft="16px">
           This will be presented to recipients

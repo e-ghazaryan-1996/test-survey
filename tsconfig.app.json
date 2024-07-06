@@ -11,7 +11,8 @@
     "paths": {
       "@/components/*": ["components/*"],
       "@/pages/*": ["pages/*"],
-      "@/router/*": ["router/*"]
+      "@/router/*": ["router/*"],
+      "@/hooks/*": ["hooks/*"]
     },
     /* Bundler mode */
     "moduleResolution": "bundler",
