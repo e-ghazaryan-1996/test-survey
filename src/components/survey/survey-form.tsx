@@ -1,6 +1,8 @@
 import {
+  Backdrop,
   Box,
   Checkbox,
+  CircularProgress,
   FormControl,
   InputLabel,
   MenuItem,
@@ -21,8 +23,15 @@ import useSurveyForm from "@/hooks/useSurveyForm";
 const names = ["Oliver Hansen", "Van Henry", "April Tucker"];
 
 const SurveyForm = () => {
-  const { formvalue, handleDateChange, handleFormValue, handleChange } =
-    useSurveyForm();
+  const {
+    formvalue,
+    handleDateChange,
+    handleFormValue,
+    handleChange,
+    handleSubmit,
+    isSubmitting,
+    setIsSubmitting,
+  } = useSurveyForm();
 
   return (
     <Box display="flex" flexDirection="column" gap="32px">
@@ -158,7 +167,7 @@ const SurveyForm = () => {
         </Typography>
       </FormControlSx>
       <Box display="flex" flexDirection="column" gap="12px">
-        <ButtonSx>
+        <ButtonSx data-testId="submit-button" onClick={handleSubmit}>
           <Typography
             sx={{
               fontSize: "14px",
@@ -175,6 +184,15 @@ const SurveyForm = () => {
           This will be presented to recipients
         </Typography>
       </Box>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={isSubmitting !== "idle"}
+        onClick={() => setIsSubmitting("idle")}
+      >
+        {isSubmitting === "loading" && <CircularProgress color="inherit" />}
+        {isSubmitting === "success" && <Typography>Success!</Typography>}
+        {isSubmitting === "error" && <Typography>Error!</Typography>}
+      </Backdrop>
     </Box>
   );
 };

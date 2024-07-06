@@ -11,6 +11,7 @@ export default defineConfig({
       "@/pages": "/src/pages",
       "@/router": "/src/router",
       "@/hooks": "/src/hooks",
+      "@/api": "/src/api",
     },
   },
 })

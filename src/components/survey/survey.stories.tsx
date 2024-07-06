@@ -20,12 +20,12 @@ export const FilledForm: Story = {
     const canvas = within(canvasElement);
 
     await step("Fill inputs", async () => {
-      console.log(canvas.getByPlaceholderText("Name"));
-      console.log(canvas.getByPlaceholderText("notes"));
       await userEvent.type(canvas.getByPlaceholderText("Name"), "John Doe");
       await userEvent.type(canvas.getByPlaceholderText("notes"), "Heyyy");
     });
-  
+    await step("Submit form", async () => {
+      await userEvent.click(canvas.getByTestId("submit-button"));
+    });
   },
 };
 

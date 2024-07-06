@@ -12,7 +12,8 @@
       "@/components/*": ["components/*"],
       "@/pages/*": ["pages/*"],
       "@/router/*": ["router/*"],
-      "@/hooks/*": ["hooks/*"]
+      "@/hooks/*": ["hooks/*"],
+      "@/api/*": ["api/*"]
     },
     /* Bundler mode */
     "moduleResolution": "bundler",
